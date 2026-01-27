@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "mehdi", email = "mehdielmo2020@gmail.com"}
 ]
 keywords = ["humanize", "web", "fastapi", "utility"]
 classifiers = [
@@ -40,9 +40,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/python-humanize/humanize"
-Documentation = "https://humanize.readthedocs.io"
-Repository = "https://github.com/python-humanize/humanize"
+Repository = "https://github.com/GitMehdi-sys/humanize"
 
 [tool.black]
 line-length = 100
@@ -50,4 +48,5 @@ target-version = ['py38']
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
 python_files = ["test_*.py"]
