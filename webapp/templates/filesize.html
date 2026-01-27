@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}File Size Humanization{% endblock %}
+
+{% block content %}
+<h2> File Size Humanization</h2>
+
+{% if result %}
+<div class="result {{ 'success' if result.success else 'error' }}">
+    <div class="result-label">
+        <strong>Function:</strong> {{ result.function }}
+        <br><strong>Input:</strong> <code>{{ result.input }} bytes</code>
+    </div>
+    <div class="result-output">
+        {% if result.success %}{% else %}{% endif %} {{ result.output }}
+    </div>
+</div>
+{% endif %}
+
+<div class="section">
+    <h3>naturalsize() - Human-Readable File Sizes</h3>
+    <p>Format a number of bytes like a human-readable file size (e.g., KB, MB, GB).</p>
+    <div class="example">
+        <strong>Examples:</strong> 
+        <br>• 1000000 bytes → "1.0 MB" (decimal)
+        <br>• 1048576 bytes → "1.0 MiB" (binary)
+        <br>• 1073741824 bytes → "1.0 GB" / "1.0 GiB"
+    </div>
+    
+    <form method="post" action="/filesize/naturalsize">
+        <div class="form-group">
+            <label for="size-value">Enter file size in bytes:</label>
+            <input type="text" id="size-value" name="value" placeholder="1048576" required>
+            <small style="color: #666; margin-top: 5px; display: block;">
+                Try: 1024 (1 KB), 1048576 (1 MB), 1073741824 (1 GB)
+            </small>
+        </div>
+        
+        <div class="checkbox-group">
+            <input type="checkbox" id="binary" name="binary" value="true">
+            <label for="binary">Use binary units (1024 base) - KiB, MiB, GiB instead of KB, MB, GB</label>
+        </div>
+        
+        <div class="checkbox-group">
+            <input type="checkbox" id="gnu" name="gnu" value="true">
+            <label for="gnu">Use GNU style formatting (K, M, G without B suffix)</label>
+        </div>
+        
+        <button type="submit">Convert with naturalsize()</button>
+    </form>
+</div>
+
+<div class="section" style="background: #e8f5e9;">
+    <h3> Common File Sizes Reference</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+        <div style="padding: 10px; background: white; border-radius: 5px;">
+            <strong>1 KB</strong><br>
+            <code>1,000 bytes</code> (decimal)<br>
+            <code>1,024 bytes</code> (binary)
+        </div>
+        <div style="padding: 10px; background: white; border-radius: 5px;">
+            <strong>1 MB</strong><br>
+            <code>1,000,000 bytes</code> (decimal)<br>
+            <code>1,048,576 bytes</code> (binary)
+        </div>
+        <div style="padding: 10px; background: white; border-radius: 5px;">
+            <strong>1 GB</strong><br>
+            <code>1,000,000,000 bytes</code> (decimal)<br>
+            <code>1,073,741,824 bytes</code> (binary)
+        </div>
+        <div style="padding: 10px; background: white; border-radius: 5px;">
+            <strong>1 TB</strong><br>
+            <code>1,000,000,000,000 bytes</code> (decimal)<br>
+            <code>1,099,511,627,776 bytes</code> (binary)
+        </div>
+    </div>
+</div>
+
+<div class="section" style="background: #fff3e0;">
+    <h3> Quick Test Values</h3>
+    <p>Try these common file sizes to see the conversion:</p>
+    <ul style="padding-left: 20px; margin-top: 10px;">
+        <li><strong>500</strong> - Small text file (500 bytes)</li>
+        <li><strong>10240</strong> - Small document (10 KB)</li>
+        <li><strong>5242880</strong> - High-resolution photo (5 MB)</li>
+        <li><strong>734003200</strong> - Music album (700 MB)</li>
+        <li><strong>4700000000</strong> - DVD movie (~4.7 GB)</li>
+        <li><strong>53687091200</strong> - Blu-ray movie (~50 GB)</li>
+        <li><strong>1099511627776</strong> - Large hard drive (1 TB)</li>
+    </ul>
+</div>
+
+<div style="margin-top: 30px; padding: 20px; background: #fce4ec; border-left: 4px solid #e91e63; border-radius: 5px;">
+    <h4 style="color: #880e4f; margin-bottom: 10px;"> Understanding Units:</h4>
+    <ul style="padding-left: 20px;">
+        <li><strong>Decimal (base 1000):</strong> KB, MB, GB - Used by hard drive manufacturers, networking</li>
+        <li><strong>Binary (base 1024):</strong> KiB, MiB, GiB - Used by operating systems, more accurate for memory</li>
+        <li><strong>GNU style:</strong> Compact format (976.6K instead of 976.6 KiB)</li>
+        <li>The difference becomes significant at larger sizes (e.g., a 1 TB drive has ~931 GiB)</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h3> Real-World Examples</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+        <thead>
+            <tr style="background: #667eea; color: white;">
+                <th style="padding: 10px; text-align: left;">File Type</th>
+                <th style="padding: 10px; text-align: left;">Typical Size (bytes)</th>
+                <th style="padding: 10px; text-align: left;">Humanized</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background: #f8f9fa;">
+                <td style="padding: 10px;">Email (text only)</td>
+                <td style="padding: 10px;"><code>5,000</code></td>
+                <td style="padding: 10px;">~5 KB</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;">MP3 song (3 min)</td>
+                <td style="padding: 10px;"><code>3,500,000</code></td>
+                <td style="padding: 10px;">~3.5 MB</td>
+            </tr>
+            <tr style="background: #f8f9fa;">
+                <td style="padding: 10px;">High-res photo</td>
+                <td style="padding: 10px;"><code>8,000,000</code></td>
+                <td style="padding: 10px;">~8 MB</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;">HD movie (2 hours)</td>
+                <td style="padding: 10px;"><code>4,000,000,000</code></td>
+                <td style="padding: 10px;">~4 GB</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

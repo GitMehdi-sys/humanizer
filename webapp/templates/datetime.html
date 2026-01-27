@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}Date & Time Humanization{% endblock %}
+
+{% block content %}
+<h2> Date & Time Humanization</h2>
+
+{% if result %}
+<div class="result {{ 'success' if result.success else 'error' }}">
+    <div class="result-label">
+        <strong>Function:</strong> {{ result.function }}
+    </div>
+    <div class="result-output">
+        {% if result.success %}{% else %}{% endif %} {{ result.output }}
+    </div>
+</div>
+{% endif %}
+
+<div class="section">
+    <h3>naturaltime() - Relative Time</h3>
+    <p>Return a natural representation of time relative to now.</p>
+    <div class="example">
+        <strong>Examples:</strong> "3 seconds ago" | "2 hours ago" | "5 days from now"
+    </div>
+    
+    <form method="post" action="/datetime/naturaltime">
+        <div class="form-group">
+            <label for="time-type">Time type:</label>
+            <select id="time-type" name="time_type" required>
+                <option value="past">Past (ago)</option>
+                <option value="future">Future (from now)</option>
+                <option value="now">Right now</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nat-days">Days:</label>
+            <input type="number" id="nat-days" name="days" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+            <label for="nat-hours">Hours:</label>
+            <input type="number" id="nat-hours" name="hours" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+            <label for="nat-minutes">Minutes:</label>
+            <input type="number" id="nat-minutes" name="minutes" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+            <label for="nat-seconds">Seconds:</label>
+            <input type="number" id="nat-seconds" name="seconds" placeholder="0" min="0">
+        </div>
+        <button type="submit">Convert with naturaltime()</button>
+    </form>
+</div>
+
+<div class="section">
+    <h3>naturaldelta() - Time Duration</h3>
+    <p>Return a natural representation of a time span (without "ago" or "from now").</p>
+    <div class="example">
+        <strong>Examples:</strong> "3 seconds" | "2 hours" | "5 days"
+    </div>
+    
+    <form method="post" action="/datetime/naturaldelta">
+        <div class="form-group">
+            <label for="delta-days">Days:</label>
+            <input type="number" id="delta-days" name="days" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+            <label for="delta-hours">Hours:</label>
+            <input type="number" id="delta-hours" name="hours" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+            <label for="delta-minutes">Minutes:</label>
+            <input type="number" id="delta-minutes" name="minutes" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+            <label for="delta-seconds">Seconds:</label>
+            <input type="number" id="delta-seconds" name="seconds" placeholder="0" min="0">
+        </div>
+        <button type="submit">Convert with naturaldelta()</button>
+    </form>
+</div>
+
+<div class="section">
+    <h3>naturalday() - Natural Day</h3>
+    <p>For dates that are today, tomorrow, or yesterday, return the natural text. Otherwise, return a formatted date.</p>
+    <div class="example">
+        <strong>Examples:</strong> "today" | "yesterday" | "tomorrow" | "Jun 05"
+    </div>
+    
+    <form method="post" action="/datetime/naturalday">
+        <div class="form-group">
+            <label for="day-type">Date type:</label>
+            <select id="day-type" name="date_type" required onchange="toggleCustomDate()">
+                <option value="today">Today</option>
+                <option value="yesterday">Yesterday</option>
+                <option value="tomorrow">Tomorrow</option>
+                <option value="custom">Custom Date</option>
+            </select>
+        </div>
+        <div class="form-group" id="custom-date-group" style="display: none;">
+            <label for="custom-date">Custom date:</label>
+            <input type="date" id="custom-date" name="custom_date">
+        </div>
+        <button type="submit">Convert with naturalday()</button>
+    </form>
+    
+    <script>
+        function toggleCustomDate() {
+            const select = document.getElementById('day-type');
+            const customGroup = document.getElementById('custom-date-group');
+            customGroup.style.display = select.value === 'custom' ? 'flex' : 'none';
+        }
+    </script>
+</div>
+
+<div class="section">
+    <h3>naturaldate() - Natural Date</h3>
+    <p>Like naturalday, but appends year for dates outside current year.</p>
+    <div class="example">
+        <strong>Examples:</strong> "today" | "Jun 05" | "Jun 05 2020"
+    </div>
+    
+    <form method="post" action="/datetime/naturaldate">
+        <div class="form-group">
+            <label for="nat-custom-date">Select a date:</label>
+            <input type="date" id="nat-custom-date" name="custom_date" required>
+        </div>
+        <button type="submit">Convert with naturaldate()</button>
+    </form>
+</div>
+
+<div class="section">
+    <h3>precisedelta() - Precise Time Delta</h3>
+    <p>Return a precise representation of a time delta.</p>
+    <div class="example">
+        <strong>Examples:</strong> "2 days, 1 hour and 33.00 seconds" | "5 hours, 30 minutes and 15.50 seconds"
+    </div>
+    
+    <form method="post" action="/datetime/precisedelta">
+        <div class="form-group">
+            <label for="precise-days">Days:</label>
+            <input type="number" id="precise-days" name="days" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+            <label for="precise-hours">Hours:</label>
+            <input type="number" id="precise-hours" name="hours" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+            <label for="precise-minutes">Minutes:</label>
+            <input type="number" id="precise-minutes" name="minutes" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+            <label for="precise-seconds">Seconds:</label>
+            <input type="number" id="precise-seconds" name="seconds" placeholder="0" min="0">
+        </div>
+        <button type="submit">Convert with precisedelta()</button>
+    </form>
+</div>
+
+<div style="margin-top: 30px; padding: 20px; background: #fff3e0; border-left: 4px solid #ff9800; border-radius: 5px;">
+    <h4 style="color: #e65100; margin-bottom: 10px;"> Tips:</h4>
+    <ul style="padding-left: 20px;">
+        <li>naturaltime() is perfect for social media timestamps and activity feeds</li>
+        <li>naturaldelta() shows duration without temporal context</li>
+        <li>naturalday() is great for calendar applications</li>
+        <li>precisedelta() gives exact time breakdowns for detailed reports</li>
+    </ul>
+</div>
+{% endblock %}

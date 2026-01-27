@@ -1,0 +1,90 @@
+/* Additional custom styles for Humanize Web App - Black & White Theme */
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+}
+
+/* Enhanced form styling */
+form {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Result animation */
+.result {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Button hover effects */
+button:active {
+    transform: translateY(0);
+}
+
+/* Focus states for accessibility */
+input:focus,
+select:focus,
+button:focus,
+textarea:focus {
+    outline: 3px solid rgba(0, 0, 0, 0.2);
+    outline-offset: 2px;
+}
+
+/* Table styling enhancements */
+table {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+th {
+    font-weight: 600;
+}
+
+tr {
+    transition: background-color 0.2s;
+}
+
+tbody tr:hover {
+    background-color: #f0f0f0 !important;
+}
+
+/* Clean sections */
+.section {
+    border: 1px solid #e0e0e0;
+}
+
+/* Responsive improvements */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    button {
+        width: 100%;
+    }
+}

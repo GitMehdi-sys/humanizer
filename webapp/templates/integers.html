@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Integer Humanization{% endblock %}
+
+{% block content %}
+<h2> Integer Humanization</h2>
+
+{% if result %}
+<div class="result {{ 'success' if result.success else 'error' }}">
+    <div class="result-label">
+        <strong>Function:</strong> {{ result.function }}
+        {% if result.input %}
+        <br><strong>Input:</strong> <code>{{ result.input }}</code>
+        {% endif %}
+    </div>
+    <div class="result-output">
+        {% if result.success %}{% else %}{% endif %} {{ result.output }}
+    </div>
+</div>
+{% endif %}
+
+<div class="section">
+    <h3>intcomma() - Add Commas to Numbers</h3>
+    <p>Convert an integer to a string containing commas every three digits.</p>
+    <div class="example">
+        <strong>Examples:</strong> 1234567 → "1,234,567" | 1234.56 → "1,234.56"
+    </div>
+    
+    <form method="post" action="/integers/intcomma">
+        <div class="form-group">
+            <label for="intcomma-value">Enter a number:</label>
+            <input type="text" id="intcomma-value" name="value" placeholder="1234567" required>
+        </div>
+        <div class="form-group">
+            <label for="intcomma-ndigits">Decimal places (optional):</label>
+            <input type="number" id="intcomma-ndigits" name="ndigits" placeholder="Leave empty for default">
+        </div>
+        <button type="submit">Convert with intcomma()</button>
+    </form>
+</div>
+
+<div class="section">
+    <h3>intword() - Convert to Word Form</h3>
+    <p>Convert a large integer to a friendly text representation.</p>
+    <div class="example">
+        <strong>Examples:</strong> 1000000 → "1.0 million" | 1234567890 → "1.2 billion"
+    </div>
+    
+    <form method="post" action="/integers/intword">
+        <div class="form-group">
+            <label for="intword-value">Enter a large number:</label>
+            <input type="text" id="intword-value" name="value" placeholder="1000000" required>
+        </div>
+        <div class="form-group">
+            <label for="intword-format">Format string (optional):</label>
+            <input type="text" id="intword-format" name="format_str" placeholder="%.1f" value="%.1f">
+            <small style="color: #666;">Use Python format strings like %.1f or %.2f</small>
+        </div>
+        <button type="submit">Convert with intword()</button>
+    </form>
+</div>
+
+<div class="section">
+    <h3>apnumber() - Spell Out Numbers</h3>
+    <p>For numbers 0-9, return the number spelled out. Otherwise, return the number.</p>
+    <div class="example">
+        <strong>Examples:</strong> 4 → "four" | 10 → "10"
+    </div>
+    
+    <form method="post" action="/integers/apnumber">
+        <div class="form-group">
+            <label for="apnumber-value">Enter a number (0-9 for words):</label>
+            <input type="number" id="apnumber-value" name="value" placeholder="5" required>
+        </div>
+        <button type="submit">Convert with apnumber()</button>
+    </form>
+</div>
+
+<div class="section">
+    <h3>ordinal() - Convert to Ordinal Form</h3>
+    <p>Convert an integer to its ordinal as a string.</p>
+    <div class="example">
+        <strong>Examples:</strong> 1 → "1st" | 2 → "2nd" | 3 → "3rd" | 4 → "4th"
+    </div>
+    
+    <form method="post" action="/integers/ordinal">
+        <div class="form-group">
+            <label for="ordinal-value">Enter a number:</label>
+            <input type="number" id="ordinal-value" name="value" placeholder="42" required>
+        </div>
+        <button type="submit">Convert with ordinal()</button>
+    </form>
+</div>
+
+<div style="margin-top: 30px; padding: 20px; background: #e7f3ff; border-left: 4px solid #2196F3; border-radius: 5px;">
+    <h4 style="color: #1976D2; margin-bottom: 10px;"> Tips:</h4>
+    <ul style="padding-left: 20px;">
+        <li>intcomma() works with both integers and floats</li>
+        <li>intword() is great for displaying large numbers in reports and dashboards</li>
+        <li>apnumber() follows AP (Associated Press) style guidelines</li>
+        <li>ordinal() handles special cases like 11th, 12th, 13th correctly</li>
+    </ul>
+</div>
+{% endblock %}
