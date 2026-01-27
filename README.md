@@ -115,14 +115,3 @@ Python | Web Dev | AI Enthusiast
 Give it a star on GitHub ⭐
 
 
----
-
-# 🧠 If you want, I can also add:
-✅ screenshots section  
-✅ badges (Python, FastAPI, license)  
-✅ installation via Docker  
-✅ live demo link section  
-✅ professional README design style  
-
-Just tell me 😎
-::contentReference[oaicite:0]{index=0}
